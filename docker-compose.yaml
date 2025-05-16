@@ -1,0 +1,22 @@
+﻿version: '3.8'
+services:
+  authapi:
+    build:
+      context: ./Document.Services.AuthAPI
+      dockerfile: Dockerfile
+    ports:
+      - "5292:5292"
+    networks:
+      - app-net
+
+  fileuploadapi:
+    build:
+      context: ./Document.Services.DocumentManagementAPI
+      dockerfile: Dockerfile
+    ports:
+      - "5189:5189"
+    networks:
+      - app-net
+networks:
+  app-net:
+    driver: bridge

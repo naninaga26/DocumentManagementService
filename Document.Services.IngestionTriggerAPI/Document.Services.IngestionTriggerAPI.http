@@ -1,0 +1,6 @@
+@Document.Services.IngestionTriggerAPI_HostAddress = http://localhost:5024
+
+GET {{Document.Services.IngestionTriggerAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
