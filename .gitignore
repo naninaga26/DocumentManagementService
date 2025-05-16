@@ -103,6 +103,9 @@ StyleCopReport.xml
 # Chutzpah Test files
 _Chutzpah*
 
+# Rider/IntelliJ
+.idea/
+
 # Visual C++ cache files
 ipch/
 *.aps
