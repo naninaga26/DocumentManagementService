@@ -8,10 +8,14 @@ using Document.Services.AuthAPI.Services;
 using Document.Services.AuthAPI.Service.IServices;
 using Document.Services.AuthAPI.Helpers; // For PasswordHasher
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
-
+using Amazon;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+// Fetch connection string from AWS Secrets Manager
+var connectionString = await SecretsManagerHelper.GetConnectionStringAsync("dev/database", RegionEndpoint.USEast1);
+
 
 // 1. Configuration
 var configuration = builder.Configuration;
@@ -24,7 +28,7 @@ builder.Services.AddControllers();
 // EF Core PostgreSQL
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
+    options.UseNpgsql(configuration.GetConnectionString(connectionString));
     options.EnableSensitiveDataLogging();
     options.EnableDetailedErrors();
 }

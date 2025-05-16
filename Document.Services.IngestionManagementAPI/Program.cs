@@ -7,9 +7,13 @@ using Document.Services.IngestionManagementAPI.Services;
 using Document.Services.IngestionManagementAPI.Services.IServices;
 using Document.Services.IngestionManagementAPI.Models;
 using Amazon.S3;
+using Amazon;
 
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Fetch connection string from AWS Secrets Manager
+var connectionString = await SecretsManagerHelper.GetConnectionStringAsync("dev/database", RegionEndpoint.USEast1);
 
 builder.WebHost.UseUrls("http://0.0.0.0:5085");
 // 1. Configuration
