@@ -9,11 +9,13 @@ public class DocumentService : IDocumentService
     private readonly AppDbContext _db;
     private readonly string _fileStorageBasePath;
     private readonly IS3Service _s3Service;
+    private readonly string _bucketName;
 
-    public DocumentService(AppDbContext db, IConfiguration configuration ,IS3Service s3Service)
+    public DocumentService(AppDbContext db, IConfiguration configuration, IS3Service s3Service)
     {
         _db = db;
         _s3Service = s3Service;
+        _bucketName = configuration["AWS:BucketName"];
         _fileStorageBasePath = configuration["FileStorage:BasePath"] ?? Path.Combine(Directory.GetCurrentDirectory(), "uploads");
         if (!Directory.Exists(_fileStorageBasePath))
         {
@@ -41,7 +43,7 @@ public class DocumentService : IDocumentService
             // }
 
             // Upload to S3
-            var res = await _s3Service.UploadFileAsync(file, "testbucket504"); // Upload to S3
+            var res = await _s3Service.UploadFileAsync(file,_bucketName ); // Upload to S3
 
             var document = new FileMetaData
             {
