@@ -21,12 +21,10 @@ public class AuthController : ControllerBase
     [HttpPost("register")]
     public async Task<IActionResult> Register(RegisterDto registerDto)
     {
-        // In a real app, you might restrict who can register or what roles they can self-assign.
-        // For example, default to 'Viewer' and let Admins upgrade.
-        if (registerDto.UserRole == Role.Admin && !User.IsInRole(Role.Admin.ToString())) // Basic check
+        // restrict who can register or what roles they can self-assign.
+        if (registerDto.UserRole == Role.Admin && !User.IsInRole(Role.Admin.ToString())) 
         {
-            // return Forbid("Only admins can create other admin users during registration.");
-            // Or simply override to a default role if self-assigning Admin is not allowed.
+            return Forbid("Only admins can create other admin users during registration.");
         }
 
         var (user, message) = await _authService.RegisterAsync(registerDto);
