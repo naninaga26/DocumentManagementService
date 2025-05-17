@@ -1,6 +1,6 @@
 using Document.Services.AuthAPI.Models.DTOs;
 using Document.Services.AuthAPI.Models;
-namespace Document.Services.AuthAPI.Service.IServices;
+namespace Document.Services.AuthAPI.Services.IServices;
 
 public interface IAuthService
 {

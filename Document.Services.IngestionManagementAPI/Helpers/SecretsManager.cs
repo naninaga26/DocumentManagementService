@@ -7,17 +7,27 @@ public static class SecretsManagerHelper
 {
     public static async Task<string> GetConnectionStringAsync(string secretName, RegionEndpoint region)
     {
-        using var client = new AmazonSecretsManagerClient(region);
-
-        var request = new GetSecretValueRequest
+        try
         {
-            SecretId = secretName
-        };
+            using var client = new AmazonSecretsManagerClient(region);
 
-        var response = await client.GetSecretValueAsync(request);
+            var request = new GetSecretValueRequest
+            {
+                SecretId = secretName
+            };
 
-        var secretJson = JsonSerializer.Deserialize<Dictionary<string, string>>(response.SecretString);
-        
-        return secretJson["ConnectionString"];
+            var response = await client.GetSecretValueAsync(request);
+
+            var secretJson = JsonSerializer.Deserialize<Dictionary<string, string>>(response.SecretString);
+
+            return secretJson["ConnectionString"];
+
+        }
+        catch (Exception ex)
+        {
+            // Handle exceptions as needed
+            Console.WriteLine($"Error retrieving secret: {ex.Message}");
+            throw ex;
+        }
     }
 }

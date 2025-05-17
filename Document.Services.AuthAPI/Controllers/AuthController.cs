@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Document.Services.AuthAPI.Models.DTOs;
-using Document.Services.AuthAPI.Service.IServices;
+using Document.Services.AuthAPI.Services.IServices;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using Document.Services.AuthAPI.Models;

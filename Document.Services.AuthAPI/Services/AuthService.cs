@@ -3,7 +3,7 @@ using Document.Services.AuthAPI.Models;
 using Document.Services.AuthAPI.Models.DTOs;
 using Document.Services.AuthAPI.Helpers;
 using Microsoft.EntityFrameworkCore;
-using Document.Services.AuthAPI.Service.IServices;
+using Document.Services.AuthAPI.Services.IServices;
 namespace Document.Services.AuthAPI.Services;
 
 public class AuthService : IAuthService
@@ -30,7 +30,7 @@ public class AuthService : IAuthService
         {
             Username = registerDto.Username,
             PasswordHash = _passwordHasher.HashPassword(registerDto.Password),
-            UserRole = registerDto.UserRole // Be careful with allowing direct role assignment on registration
+            UserRole = registerDto.UserRole 
         };
 
         _context.Users.Add(user);

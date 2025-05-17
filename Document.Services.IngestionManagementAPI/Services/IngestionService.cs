@@ -7,14 +7,14 @@ namespace Document.Services.IngestionManagementAPI.Services;
 public class IngestionService : IIngestionService
 {
     private readonly AppDbContext _db;
-    private readonly HttpClient _httpClient; // Injected for calling Spring Boot
+    private readonly HttpClient _httpClient; 
     private readonly IConfiguration _configuration;
 
 
     public IngestionService(AppDbContext db, HttpClient httpClient, IConfiguration configuration)
     {
         _db= db;
-        _httpClient = httpClient; // Base address configured in Program.cs
+        _httpClient = httpClient; 
         _configuration = configuration;
     }
 
@@ -29,13 +29,7 @@ public class IngestionService : IIngestionService
 
     public async Task<(IngestionProcess process, string message)> TriggerIngestionAsync(Guid documentId, Guid userId)
     {
-        //use rawsql query to check if the document exists
-        // var document = await GetDocumentMetadataAsync(documentId);
-        // if (document == null)
-        // {
-        //     return (null, "Document not found.");
-        // }
-
+       
         // 1. Create an IngestionProcess record in our DB
         var ingestionProcess = new IngestionProcess
         {
@@ -48,13 +42,11 @@ public class IngestionService : IIngestionService
         await _db.SaveChangesAsync();
 
 
-        // 2. Call the Spring Boot backend
+        //Call the Spring Boot backend
         var springBootIngestionEndpoint = _configuration["SpringBootService:IngestionEndpoint"];
-        // You might need to send more data, e.g., document URL or content if not accessible by Spring Boot directly
         var requestPayload = new
         { // Define a DTO for this if complex
             documentId = documentId.ToString(),
-            // callbackUrl = $"https://your-dotnet-service.com/api/ingestion/webhook/{ingestionProcess.Id}" // If Spring Boot needs to call back
             internalProcessId = ingestionProcess.Id.ToString() // So Spring Boot can correlate
         };
 
@@ -66,7 +58,7 @@ public class IngestionService : IIngestionService
             if (response.IsSuccessStatusCode)
             {
                 // Example: Spring Boot returns an ID for its process
-                var springBootResponse = await response.Content.ReadFromJsonAsync<SpringBootIngestionResponseDto>(); // Define this DTO
+                var springBootResponse = await response.Content.ReadFromJsonAsync<SpringBootIngestionResponseDto>(); 
 
                 ingestionProcess.ExternalProcessId = springBootResponse?.ExternalProcessId ?? $"FAILED_TO_GET_EXT_ID_{ingestionProcess.Id}";
                 ingestionProcess.Status = IngestionStatus.InProgress; // Or whatever initial status Spring Boot confirms
@@ -98,9 +90,6 @@ public class IngestionService : IIngestionService
             return (null, $"Error communicating with Spring Boot: {ex.Message}");
         }
     }
-    // Define this DTO based on what Spring Boot returns
-    private record SpringBootIngestionResponseDto(string ExternalProcessId);
-
 
     public async Task<IngestionStatusDto> GetIngestionStatusAsync(Guid processId)
     {

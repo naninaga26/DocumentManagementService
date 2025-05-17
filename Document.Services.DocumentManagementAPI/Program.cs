@@ -25,7 +25,7 @@ builder.Services.AddControllers();
 builder.Services.AddAWSService<IAmazonS3>();
 // EF Core PostgreSQL
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(connectionString));
 
 builder.AddAppAuthetication();
 // Authorization Policies

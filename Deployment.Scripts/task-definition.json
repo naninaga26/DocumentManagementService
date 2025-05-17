@@ -1,0 +1,49 @@
+{
+  "family": "micro-services-dotnet",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "512",
+  "memory": "1024",
+  "taskRoleArn": "arn:aws:iam::694819981630:role/ecsTaskExecutionRole",
+  "executionRoleArn": "arn:aws:iam::694819981630:role/ecsTaskExecutionRole",
+  "containerDefinitions": [
+    {
+      "name": "auth-service",
+      "image": "694819981630.dkr.ecr.us-east-1.amazonaws.com/document-service/authservice:1",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 5292,
+          "protocol": "tcp"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/micro-services-dotnet",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "auth"
+        }
+      }
+    },
+    {
+      "name": "doc-service",
+      "image": "694819981630.dkr.ecr.us-east-1.amazonaws.com/document-service/documentservice:1",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 5189,
+          "protocol": "tcp"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/micro-services-dotnet",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "doc"
+        }
+      }
+    }
+  ]
+}

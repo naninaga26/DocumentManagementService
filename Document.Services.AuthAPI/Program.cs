@@ -1,14 +1,14 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
+using Document.Services.AuthAPI.Services.IServices;
 using System.Text;
 using Document.Services.AuthAPI.Data;
 using Document.Services.AuthAPI.Models;
 using Document.Services.AuthAPI.Services;
-using Document.Services.AuthAPI.Service.IServices;
 using Document.Services.AuthAPI.Helpers; // For PasswordHasher
 using Microsoft.EntityFrameworkCore;
 using Amazon;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,7 +28,7 @@ builder.Services.AddControllers();
 // EF Core PostgreSQL
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    options.UseNpgsql(configuration.GetConnectionString(connectionString));
+    options.UseNpgsql(connectionString);
     options.EnableSensitiveDataLogging();
     options.EnableDetailedErrors();
 }
@@ -69,10 +69,35 @@ builder.Services.AddAuthorization(options =>
 
 
 builder.Services.AddControllers();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(option =>
+{
+    option.AddSecurityDefinition(name: JwtBearerDefaults.AuthenticationScheme, securityScheme: new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Description = "Enter the Bearer Authorization string as following: `Bearer Generated-JWT-Token`",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer"
+    });
+    option.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference= new OpenApiReference
+                {
+                    Type=ReferenceType.SecurityScheme,
+                    Id=JwtBearerDefaults.AuthenticationScheme
+                }
+            }, new string[]{}
+        }
+    });
+});
 
 var app = builder.Build();
 

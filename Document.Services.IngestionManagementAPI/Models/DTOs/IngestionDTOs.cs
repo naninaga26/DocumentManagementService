@@ -23,3 +23,6 @@ public record WebhookStatusUpdateDto(
     IngestionStatus Status,
     string Details
 );
+
+  // DTO based on what Spring Boot returns
+  public record SpringBootIngestionResponseDto(string ExternalProcessId);
