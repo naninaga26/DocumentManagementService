@@ -1,6 +1,6 @@
 REGION="us-east-1"
-REPO_NAME="document-service/documentservice"
-DOCKERFILE_PATH="Document.Services.DocumentManagementAPI/Dockerfile"  # Replace with your Dockerfile path
+REPO_NAME="document-service/ingestionservice"
+DOCKERFILE_PATH="../Document.Services.IngestionManagementAPI/Dockerfile"  # Replace with your Dockerfile path
 ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
 LATEST_TAG=$(aws ecr describe-images --repository-name "$REPO_NAME" --region "$REGION" --query 'sort_by(imageDetails, &imagePushedAt)[-1].imageTags[0]' --output text 2>/dev/null || echo "0")
 NEW_TAG=$((LATEST_TAG + 1))

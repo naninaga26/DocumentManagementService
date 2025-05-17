@@ -27,6 +27,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(connectionString));
 
 builder.AddAppAuthetication();
+
+//health checks 
+builder.Services.AddHealthChecks();
 // Authorization Policies
 builder.Services.AddAuthorization(options =>
 {
@@ -39,6 +42,7 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddControllers();
 
 builder.Services.AddScoped<IIngestionService, IngestionService>();
+builder.Services.AddScoped<IHttpHelperService, HttpHelperService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(option =>
 {
@@ -78,6 +82,7 @@ app.UseSwaggerUI(c =>
     }
 });
 app.UseHttpsRedirection();
+app.MapHealthChecks("/health");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();

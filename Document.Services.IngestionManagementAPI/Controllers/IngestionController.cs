@@ -1,11 +1,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Document.Services.IngestionManagementAPI.Models.DTOs;
-using Document.Services.IngestionManagementAPI.Services;
 using System.Security.Claims;
 using Document.Services.IngestionManagementAPI.Services.IServices;
-using Document.Services.IngestionManagementAPI.Models; 
-using System.ComponentModel.DataAnnotations;
 namespace Document.Services.IngestionManagementAPI.Controllers;
 
 [ApiController]
@@ -24,7 +21,7 @@ public class IngestionController : ControllerBase
 
     // POST api/ingestion/trigger
     [HttpPost("trigger")]
-    [Authorize(Policy = "EditorOrAdmin")] // Only Editors or Admins can trigger ingestion
+    [Authorize(Policy = "AdminOnly")] // Only Editors or Admins can trigger ingestion
     public async Task<IActionResult> TriggerIngestion([FromBody] IngestionTriggerRequestDto requestDto)
     {
         if (requestDto == null || requestDto.DocumentId == Guid.Empty)
@@ -68,44 +65,38 @@ public class IngestionController : ControllerBase
         return Ok(processes);
     }
 
-
-    // POST api/ingestion/{processId}/cancel
-    [HttpPost("{processId}/cancel")]
-    [Authorize(Policy = "EditorOrAdmin")]
-    public async Task<IActionResult> CancelIngestion(Guid processId)
+    // POST api/ingestion/status-update
+    [HttpPost("status-update")]
+    [Authorize(Policy = "AdminOnly")] // Only Admins can send status updates
+    public async Task<IActionResult> IngestionStatusWebhook([FromBody] IngestionStatusUpdateDto updateDto)
     {
-        var userId = GetCurrentUserId(); // For audit/permission
-        var success = await _ingestionService.CancelIngestionAsync(processId, userId);
-        if (!success)
+        if (updateDto == null || string.IsNullOrEmpty(updateDto.ExternalProcessId))
         {
-            // Could be NotFound if process doesn't exist, or BadRequest if cannot be cancelled
-            return BadRequest(new { Message = "Ingestion process not found or could not be cancelled." });
-        }
-        return Ok(new { Message = "Ingestion cancellation requested." });
-    }
-
-    // This is a WEBHOOK endpoint that Spring Boot would call.
-    // It should ideally be secured (e.g., with a shared secret, IP whitelisting, or mutual TLS).
-    // For simplicity, we'll make it [AllowAnonymous] but add a note about security.
-    [AllowAnonymous] // SECURITY NOTE: Secure this endpoint properly in production!
-    [HttpPost("webhook/status-update")]
-    public async Task<IActionResult> IngestionStatusWebhook([FromBody] WebhookStatusUpdateDto updateDto)
-    {
-        if (updateDto == null || string.IsNullOrEmpty(updateDto.ExternalProcessId)) {
             return BadRequest("Invalid webhook payload.");
         }
-
-        // TODO: Add a security check here, e.g., validate a secret header from Spring Boot
-        // string sharedSecretFromHeader = Request.Headers["X-Webhook-Secret"];
-        // if (sharedSecretFromHeader != _configuration["SpringBootService:WebhookSecret"]) {
-        //    return Unauthorized("Invalid webhook secret.");
-        // }
-
-        await _ingestionService.UpdateIngestionStatusFromWebhookAsync(
-            updateDto.ExternalProcessId,
-            updateDto.Status,
-            updateDto.Details
-        );
-        return Ok(new { Message = "Webhook received and processed."});
+        var res = await _ingestionService.UpdateIngestionStatus(GetCurrentUserId(), updateDto);
+        return Ok(res);
+    }
+    
+    // This endpoint is for triggering a spring event in the ingestion process
+     // POST api/ingestion/status-update
+    [HttpPost("{processId}/trigger-spring-event")]
+    [Authorize(Policy = "AdminOnly")] // Only Admins can trigger spring event
+    public async Task<IActionResult> TriggerSpringService(Guid processId)
+    {
+        try
+        {
+            // Validate the processId
+            if (processId == Guid.Empty)
+            {
+                return BadRequest("Invalid process ID.");
+            }
+            var res = await _ingestionService.TriggerSpringServiceAsync(processId);
+            return Ok(res);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest($"Error: {ex.Message}");
+        }
     }
 }

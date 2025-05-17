@@ -90,12 +90,12 @@ public class DocumentsController : ControllerBase
     // PUT api/documents/{id} - Placeholder for update
     [HttpPut("{id}")]
     [Authorize(Policy = "EditorOrAdmin")]
-    public async Task<IActionResult> UpdateDocument(Guid id /*, [FromBody] DocumentUpdateDto updateDto */)
+    public async Task<IActionResult> UpdateDocument(Guid id,IFormFile file)
     {
         var currentUserId = GetCurrentUserId();
         // bool success = await _documentService.UpdateDocumentAsync(id, updateDto, currentUserId);
         // For now, a simple placeholder:
-        bool success = await _documentService.UpdateDocumentAsync(id, currentUserId);
+        bool success = await _documentService.UpdateDocumentAsync(id,currentUserId,file);
         if (!success)
         {
             return NotFound(new { Message = "Document not found or update failed (check permissions)." });

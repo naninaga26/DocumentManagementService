@@ -67,6 +67,8 @@ builder.Services.AddAuthorization(options =>
     // Viewer policy is implicit if just authenticated, or you can define one
 });
 
+//health checks 
+builder.Services.AddHealthChecks();
 
 builder.Services.AddControllers();
 builder.Services.AddScoped<IUserService, UserService>();
@@ -112,6 +114,7 @@ app.UseSwaggerUI(c =>
     }
 });
 app.UseHttpsRedirection();
+app.MapHealthChecks("/health");
 app.UseAuthentication();
 app.UseAuthorization();
 

@@ -28,6 +28,10 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(connectionString));
 
 builder.AddAppAuthetication();
+
+//health checks 
+builder.Services.AddHealthChecks();
+
 // Authorization Policies
 builder.Services.AddAuthorization(options =>
 {
@@ -80,6 +84,7 @@ app.UseSwaggerUI(c =>
     }
 });
 app.UseHttpsRedirection();
+app.MapHealthChecks("/health");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();

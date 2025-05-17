@@ -6,9 +6,7 @@ public class FileMetaData
 {
     public Guid Id { get; set; } = Guid.NewGuid();
     [Required]
-    [MaxLength(255)]
     public  string FileName { get; set; }
-    [MaxLength(50)]
     public  string ContentType { get; set; } 
     public long FileSize { get; set; } 
     public  string S3Url { get; set; } 

@@ -9,7 +9,7 @@
   "containerDefinitions": [
     {
       "name": "auth-service",
-      "image": "694819981630.dkr.ecr.us-east-1.amazonaws.com/document-service/authservice:1",
+      "image": "694819981630.dkr.ecr.us-east-1.amazonaws.com/document-service/authservice:2",
       "essential": true,
       "portMappings": [
         {
@@ -28,11 +28,30 @@
     },
     {
       "name": "doc-service",
-      "image": "694819981630.dkr.ecr.us-east-1.amazonaws.com/document-service/documentservice:1",
+      "image": "694819981630.dkr.ecr.us-east-1.amazonaws.com/document-service/documentservice:4",
       "essential": true,
       "portMappings": [
         {
           "containerPort": 5189,
+          "protocol": "tcp"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/micro-services-dotnet",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "doc"
+        }
+      }
+    },
+    {
+      "name": "ingestion-service",
+      "image": "694819981630.dkr.ecr.us-east-1.amazonaws.com/document-service/ingestionservice:1",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 5085,
           "protocol": "tcp"
         }
       ],
