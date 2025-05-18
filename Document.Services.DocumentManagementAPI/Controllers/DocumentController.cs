@@ -6,7 +6,7 @@ using Document.Services.DocumentManagementAPI.Services.IServices;
 using System.Security.Claims; 
 using Document.Services.DocumentManagementAPI.Models;
 
-namespace DocumentManagementService.Controllers;
+namespace Document.Services.DocumentManagementAPI.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

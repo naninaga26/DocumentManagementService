@@ -5,7 +5,7 @@ using Document.Services.AuthAPI.Models.DTOs;
 using Document.Services.AuthAPI.Services.IServices;
 using System.Security.Claims; // For ClaimTypes
 
-namespace DocumentManagementService.Controllers;
+namespace Document.Services.AuthAPI.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

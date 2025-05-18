@@ -4,7 +4,7 @@ using Document.Services.AuthAPI.Services.IServices;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using Document.Services.AuthAPI.Models;
-namespace DocumentManagementService.Controllers;
+namespace Document.Services.AuthAPI.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

@@ -17,6 +17,14 @@ services:
       - "5189:5189"
     networks:
       - app-net
+  ingestionapi:
+    build:
+      context: ./Document.Services.IngestionManagementAPI
+      dockerfile: Dockerfile
+    ports:
+      - "5189:5189"
+    networks:
+      - app-net
 networks:
   app-net:
     driver: bridge
