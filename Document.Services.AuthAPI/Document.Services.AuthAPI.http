@@ -1,0 +1,6 @@
+@Document.Services.AuthAPI_HostAddress = http://localhost:5292
+
+GET {{Document.Services.AuthAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

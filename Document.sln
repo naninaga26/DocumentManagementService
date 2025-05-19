@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# 
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Document", "Document\Document.csproj", "{01471046-D2E6-45EA-81BA-ACB8A72883EA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0476AB04-5F36-412B-9284-03254C844E87}"
+	ProjectSection(SolutionItems) = preProject
+		compose.yaml = compose.yaml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Document.Services.AuthAPI", "Document.Services.AuthAPI\Document.Services.AuthAPI.csproj", "{04BD8EE6-FC89-4D18-B72C-CE6A93E14C60}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Document.Services.UserManagementAPI", "Document.Services.UserManagementAPI\Document.Services.UserManagementAPI.csproj", "{39EC79B6-0373-42DD-A405-AAEA1132EE02}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Document.Services.DocumentManagementAPI", "Document.Services.DocumentManagementAPI\Document.Services.DocumentManagementAPI.csproj", "{45DD3FCE-B409-4F2C-9286-CB0021B713A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Document.Services.IngestionTriggerAPI", "Document.Services.IngestionTriggerAPI\Document.Services.IngestionTriggerAPI.csproj", "{D63FDDB0-84A6-46CF-8A08-4CD171597186}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Document.Services.IngestionManagementAPI", "Document.Services.IngestionManagementAPI\Document.Services.IngestionManagementAPI.csproj", "{14BD1500-022A-4416-B8C5-8E5E516F11C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Document.Services.AuthAPI.Tests", "Document.Services.AuthAPI.Tests\Document.Services.AuthAPI.Tests.csproj", "{EB4D59FD-FD9D-4B68-AC99-20AF205326B0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{01471046-D2E6-45EA-81BA-ACB8A72883EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01471046-D2E6-45EA-81BA-ACB8A72883EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01471046-D2E6-45EA-81BA-ACB8A72883EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01471046-D2E6-45EA-81BA-ACB8A72883EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04BD8EE6-FC89-4D18-B72C-CE6A93E14C60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04BD8EE6-FC89-4D18-B72C-CE6A93E14C60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04BD8EE6-FC89-4D18-B72C-CE6A93E14C60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04BD8EE6-FC89-4D18-B72C-CE6A93E14C60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39EC79B6-0373-42DD-A405-AAEA1132EE02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39EC79B6-0373-42DD-A405-AAEA1132EE02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39EC79B6-0373-42DD-A405-AAEA1132EE02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39EC79B6-0373-42DD-A405-AAEA1132EE02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45DD3FCE-B409-4F2C-9286-CB0021B713A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45DD3FCE-B409-4F2C-9286-CB0021B713A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45DD3FCE-B409-4F2C-9286-CB0021B713A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45DD3FCE-B409-4F2C-9286-CB0021B713A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D63FDDB0-84A6-46CF-8A08-4CD171597186}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D63FDDB0-84A6-46CF-8A08-4CD171597186}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D63FDDB0-84A6-46CF-8A08-4CD171597186}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D63FDDB0-84A6-46CF-8A08-4CD171597186}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14BD1500-022A-4416-B8C5-8E5E516F11C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14BD1500-022A-4416-B8C5-8E5E516F11C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14BD1500-022A-4416-B8C5-8E5E516F11C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14BD1500-022A-4416-B8C5-8E5E516F11C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB4D59FD-FD9D-4B68-AC99-20AF205326B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB4D59FD-FD9D-4B68-AC99-20AF205326B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB4D59FD-FD9D-4B68-AC99-20AF205326B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB4D59FD-FD9D-4B68-AC99-20AF205326B0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
