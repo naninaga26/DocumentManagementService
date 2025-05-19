@@ -108,7 +108,7 @@ app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Cart API");
-    c.RoutePrefix = string.Empty;
+    c.RoutePrefix = "auth-service";
     
 });
 app.UseHttpsRedirection();
