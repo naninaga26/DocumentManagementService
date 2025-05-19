@@ -1,6 +1,6 @@
 #!/bin/bash
 CLUSTER_NAME="cool-ostrich-5ws40d"
-SERVICE_NAME="micro-services-dotnet-service-i6yugo63"
+SERVICE_NAME="micro-services-dotnet-service-djsd7y3d"
 TASK_DEF_FILE="task-definition.json"
 
 # existing running tasks
