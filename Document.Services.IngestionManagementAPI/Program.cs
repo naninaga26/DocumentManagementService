@@ -75,7 +75,7 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Cart API");
+    c.SwaggerEndpoint("ingestion-service/swagger/v1/swagger.json", "Cart API");
     c.RoutePrefix = "ingestion-service";
     
 });
