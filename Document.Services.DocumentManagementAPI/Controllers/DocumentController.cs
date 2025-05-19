@@ -9,7 +9,7 @@ using Document.Services.DocumentManagementAPI.Models;
 namespace Document.Services.DocumentManagementAPI.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("docservice/api/[controller]")]
 [Authorize] // All document actions require authentication
 public class DocumentsController : ControllerBase
 {

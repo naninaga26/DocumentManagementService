@@ -8,7 +8,7 @@ using System.Security.Claims; // For ClaimTypes
 namespace Document.Services.AuthAPI.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("auth-service/api/[controller]")]
 [Authorize(Policy = "AdminOnly")]
 public class UsersController : ControllerBase
 {
