@@ -25,6 +25,22 @@ git clone https://github.com/yourusername/your-repo.git
 cd your-repo
 ```
 
+---
+
+## 📁 Project Structure
+
+```
+.
+├── docker-compose.yml
+├── services/
+│   ├── UserService/
+│   ├── OrderService/
+│   └── InventoryService/
+└── README.md
+```
+
+---
+
 ## 🐳 Running the Full Solution with Docker Compose
 
 To run all services together using Docker Compose:
@@ -41,4 +57,24 @@ This will:
 
 > Ensure Docker is installed and running on your machine.
 
+---
+---
+
+## 🔧 Running Services Individually
+
+To run a specific service on your local machine:
+
+```bash
+cd path/to/service-name
+dotnet run
+```
+
+For example:
+
+```bash
+cd services/UserService
+dotnet run
+```
+
+> Make sure any dependencies (e.g., databases, other services) are running if required.
 ---
