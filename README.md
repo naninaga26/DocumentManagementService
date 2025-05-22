@@ -58,7 +58,6 @@ This will:
 > Ensure Docker is installed and running on your machine.
 
 ---
----
 
 ## 🔧 Running Services Individually
 
@@ -72,7 +71,7 @@ dotnet run
 For example:
 
 ```bash
-cd services/UserService
+cd services/Document.Services.AuthAPI
 dotnet run
 ```
 
