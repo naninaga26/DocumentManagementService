@@ -46,7 +46,7 @@ cd your-repo
 To run all services together using Docker Compose:
 
 ```bash
-docker-compose up --build
+docker-compose u
 ```
 
 This will:
