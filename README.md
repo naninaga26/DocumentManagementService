@@ -6,7 +6,7 @@ A modular solution containing Document, Auth, and Ingestion services with Docker
 
 - **Auth Service**: JWT-based authentication & authorization
 - **Document Service**: File storage and management
-- **Ingestion Service**: Data processing pipeline
+- **Ingestion Service**: Data processing and Ingestion Service
 - **Dockerized**: Ready-to-run containerized environment
 - **API Documentation**: Integrated Swagger UI
 
