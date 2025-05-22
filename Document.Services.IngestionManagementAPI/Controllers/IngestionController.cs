@@ -6,7 +6,7 @@ using Document.Services.IngestionManagementAPI.Services.IServices;
 namespace Document.Services.IngestionManagementAPI.Controllers;
 
 [ApiController]
-[Route("ingestion-service/api/[controller]")]
+[Route("api/[controller]")]
 [Authorize] // All ingestion actions require authentication
 public class IngestionController : ControllerBase
 {

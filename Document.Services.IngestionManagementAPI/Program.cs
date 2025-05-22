@@ -70,17 +70,18 @@ builder.Services.AddSwaggerGen(option =>
 });
 
 var app = builder.Build();
+app.UsePathBase("/ingestion-service");
 
 // Configure the HTTP request pipeline.
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
-    c.SwaggerEndpoint("ingestion-service/swagger/v1/swagger.json", "Cart API");
-    c.RoutePrefix = "ingestion-service";
+    c.SwaggerEndpoint("/ingestion-service/swagger/v1/swagger.json", "Ingestion API");
+    c.RoutePrefix = string.Empty;
     
 });
 app.UseHttpsRedirection();
-app.MapHealthChecks("ingestion-service/health");
+app.MapHealthChecks("/health");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
