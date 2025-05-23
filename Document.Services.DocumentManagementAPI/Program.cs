@@ -73,15 +73,18 @@ builder.Services.AddSwaggerGen(option =>
 
 var app = builder.Build();
 
+
+app.UsePathBase("/doc-service");
+
 // Configure the HTTP request pipeline.
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
-    c.SwaggerEndpoint("doc-service/swagger/v1/swagger.json", "Cart API");
-    c.RoutePrefix = "doc-service";
+    c.SwaggerEndpoint("/doc-service/swagger/v1/swagger.json", "Document API");
+    c.RoutePrefix = string.Empty;
 });
 app.UseHttpsRedirection();
-app.MapHealthChecks("doc-service/health");
+app.MapHealthChecks("/health");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
