@@ -43,8 +43,9 @@ cd your-repo
 
 ## 🐳 Running the Full Solution with Docker Compose
 
-Add .env file by Copying the structure from .env.example
-Make sure all the necessary secrets and s3 bucket existed in your AWS Account
+- Add .env file by Copying the structure from .env.example.
+- Make sure all the necessary secrets and s3 bucket existed in your AWS Account
+
 
 To run all services together using Docker Compose:
 
